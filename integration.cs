@@ -34,9 +34,14 @@ namespace ConsoleApplication7
         {
             Console.WriteLine(s);
         }
+        
         static List<Schiff> init()
         {
-            return new List<Schiff>();
+            return new List<Schiff>() 
+            {
+                new Schiff(2,"a1",AusrichtungsTyp.horizontal), 
+                new Schiff(3,"c2",AusrichtungsTyp.vertikal )
+            };
         }
 
         static String spielfeld_bauen(List<Field> shotliste)
@@ -84,7 +89,6 @@ namespace ConsoleApplication7
             
 
             OldShots.Add(new Field(koord.X,koord.Y, (hit)? "x" : "~")) ;
-            OldShots.ForEach( f => Console.WriteLine(f.x +" " +f.y+ "  " +f.status));
             return OldShots;
         }
 
