@@ -1,15 +1,25 @@
  public class Schiff
     {
-        List<String> Koordinaten = new List<string>();
+        public List<Koordinate> Koordinaten { get; private set; }
         public Schiff(int Groesse, string Startposition,AusrichtungsTyp Ausrichtung)
         {
-            char _v = Startposition[0]; 
-            char _h = Startposition[1];
+            Koordinaten = new List<Koordinate>();
+            Koordinate _start = new Koordinate();
+            _start.Y = Startposition[0];
+            _start.X = Startposition.Length > 2 ? Convert.ToInt32((Startposition[1] + Startposition[2]).ToString()): Convert.ToInt32(Startposition[1].ToString());
             for(int i = 0;i < Groesse;i++)
             {
-                 String _koord =(Ausrichtung == AusrichtungsTyp.vertikal)?
-                    ((_v++).ToString() + _h) : _v.ToString() + _h++;
-                    
+                Koordinate _koord = new Koordinate();
+                if(Ausrichtung == AusrichtungsTyp.vertikal)
+                {
+                    _koord.Y = _start.Y++;
+                    _koord.X =  _start.X ;
+                }
+                if(Ausrichtung == AusrichtungsTyp.horizontal)
+                {
+                    _koord.Y = _start.Y;
+                    _koord.X = _start.X++;
+                }
                 Koordinaten.Add(_koord);
             }
         }
