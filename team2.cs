@@ -4,7 +4,7 @@ class Treffer
         {
             Schuss _shot = new Schuss();
             _shot.Koordinaten = Koordinate;
-            _shot.getroffen = Schiffe.Exists(s => s.Koordinaten.Contains(_shot.Koordinaten)); ;
+            _shot.getroffen = Schiffe.Exists(s => s.Koordinaten.Contains(_shot.Koordinaten));
 
             OldSchots.Add(_shot);
             return OldSchots;
