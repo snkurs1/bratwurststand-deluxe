@@ -18,3 +18,8 @@
     {
         horizontal, vertikal
     }
+public struct Koordinate
+    {
+        public char Y;
+        public int X;
+    }
