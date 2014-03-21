@@ -10,11 +10,21 @@ namespace ConsoleApplication7
         static void Main(string[] args)
         {
             var shiplist = init();
+            var shotlist = new List<Field>();
             do
             {
-
+                var feld=spielfeld_bauen(shotlist);
+                display(feld);
+                break;
             } while (true);
+
+            Console.ReadKey();
            
+        }
+        
+        static void display(String s)
+        {
+            Console.WriteLine(s);
         }
         
         static List<Schiff> init()
