@@ -35,6 +35,6 @@ public class Schiff
     }
 public struct Koordinate
     {
-        public char Y;
+        public int Y;
         public int X;
     }
