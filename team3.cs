@@ -2,5 +2,9 @@
   { 
     int Groesse;
     string Startposition;
-    string Ausrichtung;
+    AusrichtungsTyp Ausrichtung;
+  }
+  public enum AusrichtungsTyp
+  {
+      horizontal, vertikal
   }
