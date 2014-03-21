@@ -24,7 +24,7 @@ public class Schiff
         public static Koordinate StringToKoord(String Koordinate)
         {
             Koordinate _koord = new Koordinate();
-            _koord.Y = Koordinate[0] - 64;
+            _koord.Y = char.ToUpper(Koordinate[0]) - 64;
             _koord.X = Koordinate.Length > 2 ? Convert.ToInt32((Koordinate[1] + Koordinate[2]).ToString()) : Convert.ToInt32(Koordinate[1].ToString());
             return _koord;
         }
