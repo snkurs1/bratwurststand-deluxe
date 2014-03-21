@@ -15,18 +15,25 @@ namespace ConsoleApplication7
             {
                 var feld=spielfeld_bauen(shotlist);
                 display(feld);
-                break;
+                var answer=ask("Koordinaten?");
+                if (answer.Count() == 1) break;
+                shotlist = Fire(answer, shiplist, shotlist);
+
+                
             } while (true);
 
-            Console.ReadKey();
            
         }
-        
+
+        static String ask(String question)
+        {
+            display(question);
+            return Console.ReadLine();
+        }
         static void display(String s)
         {
             Console.WriteLine(s);
         }
-        
         static List<Schiff> init()
         {
             return new List<Schiff>();
@@ -70,48 +77,61 @@ namespace ConsoleApplication7
             return new Field(field.x, field.y, status);
         }
 
+        public static List<Field> Fire(String Koordinate, List<Schiff> Schiffe, List<Field> OldShots)
+        {
+            var koord = StringToKoord(Koordinate);
+            var hit = Schiffe.Exists(s => s.Koordinaten.Contains(koord));
+            
+
+            OldShots.Add(new Field(koord.X,koord.Y, (hit)? "x" : "~")) ;
+            OldShots.ForEach( f => Console.WriteLine(f.x +" " +f.y+ "  " +f.status));
+            return OldShots;
+        }
+
+        public static Koordinate StringToKoord(String Koordinate)
+        {
+            Koordinate _koord = new Koordinate();
+            _koord.Y = char.ToUpper(Koordinate[0]) - 64;
+            _koord.X = Koordinate.Length > 2 ? Convert.ToInt32((Koordinate[1] + Koordinate[2]).ToString()) : Convert.ToInt32(Koordinate[1].ToString());
+            return _koord;
+        }
     }
 
     public class Schiff
     {
-        public List<String> Koordinaten = new List<string>();
+        public List<Koordinate> Koordinaten { get; private set; }
         public Schiff(int Groesse, string Startposition, AusrichtungsTyp Ausrichtung)
         {
-            char _v = Startposition[0];
-            char _h = Startposition[1];
+            Koordinaten = new List<Koordinate>();
+            Koordinate _start = Program.StringToKoord(Startposition);
             for (int i = 0; i < Groesse; i++)
             {
-                String _koord = (Ausrichtung == AusrichtungsTyp.vertikal) ?
-                   ((_v++).ToString() + _h) : _v.ToString() + _h++;
-
+                Koordinate _koord = new Koordinate();
+                if (Ausrichtung == AusrichtungsTyp.vertikal)
+                {
+                    _koord.Y = _start.Y++;
+                    _koord.X = _start.X;
+                }
+                if (Ausrichtung == AusrichtungsTyp.horizontal)
+                {
+                    _koord.Y = _start.Y;
+                    _koord.X = _start.X++;
+                }
                 Koordinaten.Add(_koord);
             }
         }
+        
     }
     public enum AusrichtungsTyp
     {
         horizontal, vertikal
     }
-
-
-    class Treffer
+    public struct Koordinate
     {
-        public static List<Schuss> Fire(String Koordinate, List<Schiff> Schiffe, List<Schuss> OldShots)
-        {
-            Schuss _shot = new Schuss();
-            _shot.Koordinaten = Koordinate;
-            _shot.getroffen = Schiffe.Exists(s => s.Koordinaten.Contains(_shot.Koordinaten));
-
-            OldShots.Add(_shot);
-            return OldShots;
-        }
+        public int Y;
+        public int X;
     }
-    public struct Schuss
-    {
-        public bool getroffen;
-        public String Koordinaten;
-    }
-
+   
     class Field
     {
         public int x;
@@ -125,11 +145,6 @@ namespace ConsoleApplication7
             status = fieldStatus;
         }
     }
-    public struct Koordinate
-    {
-        public char Y;
-        public int X;
-    }
-
+    
 
 }
