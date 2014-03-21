@@ -9,8 +9,17 @@ namespace ConsoleApplication7
     {
         static void Main(string[] args)
         {
+            var shiplist = init();
+            do
+            {
 
+            } while (true);
            
+        }
+        
+        static List<Schiff> init()
+        {
+            return new List<Schiff>();
         }
 
         static String spielfeld_bauen(List<Field> shotliste)
