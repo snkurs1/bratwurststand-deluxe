@@ -106,6 +106,11 @@ namespace ConsoleApplication7
             status = fieldStatus;
         }
     }
+    public struct Koordinate
+    {
+        public char Y;
+        public int X;
+    }
 
 
 }
