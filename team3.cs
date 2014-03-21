@@ -7,15 +7,9 @@
             char _h = Startposition[1];
             for(int i = 0;i < Groesse;i++)
             {
-                String _koord = String.Empty;
-                if(Ausrichtung == AusrichtungsTyp.vertikal)
-                {
-                    _koord =  ((_v++).ToString() + _h) ;
-                }
-                if(Ausrichtung == AusrichtungsTyp.horizontal)
-                {
-                    _koord = _v.ToString() + _h++;
-                }
+                 String _koord =(Ausrichtung == AusrichtungsTyp.vertikal)?
+                    ((_v++).ToString() + _h) : _v.ToString() + _h++;
+                    
                 Koordinaten.Add(_koord);
             }
         }
